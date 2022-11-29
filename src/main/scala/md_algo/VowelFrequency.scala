@@ -27,26 +27,27 @@ object Main extends App {
 
   def challengeFunction(i: Int, s: String): String = {
 
+    val f = (c: Char) => "aeiou".indexOf(c) == -1
     def r(n: Int, s: String, res: String = "", org: Int): String = {
 //    assertEquals(mainFunction.challengeFunction(3, "abracadabra"), "aaabraaacaaadaaabraaa")
       if (s.isEmpty) res
       else {
-        if ("aeiou".indexOf(s.head) == -1) {
+        if (f(s.head)) {
           r(n, s.tail, res + s.head, org)
         } else {
           val rem = n % 10
           val q = n / 10
-          val z = s.takeWhile(x => "aeiou".indexOf(x) == -1).distinct
+          val z = s.span(x => !(f(x)))
           if (q == 0)
-            r(org, s.tail, res + (z * rem), org)
-          else r(q, s.tail, res + (z * rem), org)
+            r(org, z._2, res + (z._1.distinct * rem), org)
+          else r(q, z._2, res + (z._2 * rem), org)
         }
       }
     }
 
     r(i.toString.reverse.toInt, s, "", i.toString.reverse.toInt)
   }
-  val r = challengeFunction(2, "aeiouaeiouaeiouaeiouaeiouaeiouaeiou")
+  val r = challengeFunction(1, "whooooooooooooooooop")
   println(r)
-  assert(r == "aaeeiioouuaaeeiioouuaaeeiioouuaaeeiioouuaaeeiioouuaaeeiioouuaaeeiioouu")
+  assert(r == "whop")
 }
