@@ -28,24 +28,24 @@ object Main extends App {
   def challengeFunction(i: Int, s: String): String = {
 
     val f = (c: Char) => "aeiou".indexOf(c) == -1
-    def r(n: Int, s: String, res: String = "", org: Int): String = {
-//    assertEquals(mainFunction.challengeFunction(3, "abracadabra"), "aaabraaacaaadaaabraaa")
-      if (s.isEmpty) res
+    val b = i.toString.reverse.toInt
+    def r(n: Int, s: String, q: String = "", o: Int): String = {
+      val h = s.head
+      if (s.isEmpty) q
       else {
-        if (f(s.head)) {
-          r(n, s.tail, res + s.head, org)
+        if (f(h)) {
+          r(n, s.tail, q + h, o)
         } else {
-          val rem = n % 10
+          val e = n % 10
           val q = n / 10
-          val z = s.span(x => !(f(x)))
+          val z = s.span(x => !f(x))
           if (q == 0)
-            r(org, z._2, res + (z._1.distinct * rem), org)
-          else r(q, z._2, res + (z._2 * rem), org)
+            r(o, z._2, q + (z._1.distinct * e), o)
+          else r(q, z._2, q + (z._2 * e), o)
         }
       }
     }
-
-    r(i.toString.reverse.toInt, s, "", i.toString.reverse.toInt)
+    r(b, s, "", b)
   }
   val r = challengeFunction(1, "whooooooooooooooooop")
   println(r)
