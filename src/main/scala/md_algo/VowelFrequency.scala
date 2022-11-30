@@ -24,30 +24,25 @@ object Main extends App {
   Explanation:
   Alternate expanding the vowels by 9 then 2 then 9 then 2 then 9 then 2 etc.
    */
-
   def challengeFunction(i: Int, s: String): String = {
 
-    val f = (c: Char) => "aeiou".indexOf(c) == -1
-    val b = i.toString.reverse.toInt
-    def r(n: Int, s: String, q: String = "", o: Int): String = {
-      val h = s.head
-      if (s.isEmpty) q
+    val f = (c: Char) => "AEIOUaeiou".indexOf(c) == -1
+    val o = i.toString.reverse.toInt
+    def p(n: Int, s: String, r: String = ""): String = {
+      if (s.isEmpty) r
       else {
-        if (f(h)) {
-          r(n, s.tail, q + h, o)
-        } else {
-          val e = n % 10
+        val h = s.head
+        if (f(h)) p(n, s.tail, r + h)
+        else {
+          val m = n % 10
           val q = n / 10
-          val z = s.span(x => !f(x))
+          val z = s.span(x => x.toLower == h.toLower)
           if (q == 0)
-            r(o, z._2, q + (z._1.distinct * e), o)
-          else r(q, z._2, q + (z._2 * e), o)
+            p(o, z._2, r + h.toString * m)
+          else p(q, z._2, r + h.toString * m)
         }
       }
     }
-    r(b, s, "", b)
+    p(o, s)
   }
-  val r = challengeFunction(1, "whooooooooooooooooop")
-  println(r)
-  assert(r == "whop")
 }
