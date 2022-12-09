@@ -1,0 +1,21 @@
+
+val width = 6
+val boxes = 5
+def top(start: String, middle: String, n: String, end: String) = {
+  val c = boxes * width
+  var s = start
+  for(i <- 1 until c-boxes) {
+    if(i % (width-1) == 0) s = s +  middle
+    else s = s + n
+  }
+  s = s + end + "\n"
+  s
+}
+
+val s = "┌" + "\n" + "|" + "\n" + "|"
+
+top("┌", "┬", "─", "┐")
+println()
+top("|", "|",  " ", "|")
+println()
+top("├", "┼", "─", "┤")
