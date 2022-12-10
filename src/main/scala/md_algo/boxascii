@@ -31,7 +31,7 @@ object Main extends App {
    */
 
 
-  def challengeFunction(x: Int, y: Int): String = {
+    def challengeFunction(x: Int, y: Int): String = {
     val width = 6
     val boxes = x
     def top(start: String, middle: String, n: String, end: String) = {
@@ -63,10 +63,10 @@ object Main extends App {
       s = s +  top("┌", "┬", "─", "┐")
       s = s + middle(y)
       s = s + top("└", "┴", "─", "┘")
-     s
+      s.init
     }
-
   }
+
 
   val res = challengeFunction(5,5)
   val str =
