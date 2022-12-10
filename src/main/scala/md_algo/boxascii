@@ -1,21 +1,36 @@
+package example
 
-val width = 6
-val boxes = 5
-def top(start: String, middle: String, n: String, end: String) = {
-  val c = boxes * width
-  var s = start
-  for(i <- 1 until c-boxes) {
-    if(i % (width-1) == 0) s = s +  middle
-    else s = s + n
+object TEst extends App {
+
+
+  val width = 6
+  val boxes = 1
+  def top(start: String, middle: String, n: String, end: String) = {
+    val c = boxes * width
+    var s = start
+    for(i <- 1 until c-boxes) {
+      if(i % (width-1) == 0) s = s +  middle
+      else s = s + n
+    }
+    s = s + end + "\n"
+    s
   }
-  s = s + end + "\n"
-  s
+
+
+
+  def middle(h: Int) = {
+    val c = 2 * h
+    var s = ""
+    for(i <- 1 until c) {
+      if(i % 2 != 0) s = s + top("|", "|",  " ", "|")
+      else s = s + top("├", "┼", "─", "┤")
+    }
+    s
+  }
+
+  var s = ""
+    s = s +  top("┌", "┬", "─", "┐")
+    s = s + middle(11)
+    s = s + top("└", "┴", "─", "┘")
+  println(s)
 }
-
-val s = "┌" + "\n" + "|" + "\n" + "|"
-
-top("┌", "┬", "─", "┐")
-println()
-top("|", "|",  " ", "|")
-println()
-top("├", "┼", "─", "┤")
