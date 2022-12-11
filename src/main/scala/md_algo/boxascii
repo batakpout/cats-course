@@ -1,101 +1,26 @@
-package example
+  def challengeFunction(x: Int, y: Int): String = {
+    type S = String
 
-object Main extends App {
-
-  /*
-  Challenge 6 - boxes
-
-  Given two integers in, create an output that draws an array of boxes in a string for the output.
-
-  Size of the boxes are (including edge characters) 6 wide and 3 tall.
-   All required ASCII characters have been supplied outside of your required solution.
-
-  e.g.
-  input 2,2
-  output
-  ┌────┬────┐
-  │    │    │
-  ├────┼────┤
-  │    │    │
-  └────┴────┘
-
-  input 2,3
-  output
-  ┌────┬────┐
-  │    │    │
-  ├────┼────┤
-  │    │    │
-  ├────┼────┤
-  │    │    │
-  └────┴────┘
-   */
-
-
-    def challengeFunction(x: Int, y: Int): String = {
-    val width = 6
-    val boxes = x
-    def top(start: String, middle: String, n: String, end: String) = {
-      val c = boxes * width
-      var s = start
-      for(i <- 1 until c-boxes) {
-        if(i % (width-1) == 0) s = s +  middle
+    def l(t: S, m: S, n: S, e: S) = {
+      var s = t
+      for (i <- 1 until (x * 6) - x) {
+        if (i % 5 == 0) s = s + m
         else s = s + n
       }
-      s = s + end + "\n"
-      s
+      s + e + "\n"
     }
 
-
-
-    def middle(h: Int) = {
-      val c = 2 * h
+    def m(h: Int) = {
       var s = ""
-      for(i <- 1 until c) {
-        if(i % 2 != 0) s = s + top("│", "│",  " ", "│")
-        else s = s + top("├", "┼", "─", "┤")
+      for (i <- 1 until 2 * h) {
+        if (i % 2 != 0) s = s + l("│", "│", " ", "│")
+        else s = s + l("├", "┼", "─", "┤")
       }
       s
     }
 
-    if(x==0 || y ==0) ""
-    else {
-      var s = ""
-      s = s +  top("┌", "┬", "─", "┐")
-      s = s + middle(y)
-      s = s + top("└", "┴", "─", "┘")
-      s.init
-    }
+    if (x == 0 || y == 0) ""
+    else
+      (l("┌", "┬", "─", "┐") + m(y) + l("└", "┴", "─", "┘")).init
+
   }
-
-
-  val res = challengeFunction(5,5)
-  val str =
-    "┌────┬────┬────┬────┬────┐\n" +
-      "│    │    │    │    │    │\n" +
-      "├────┼────┼────┼────┼────┤\n" +
-      "│    │    │    │    │    │\n" +
-      "├────┼────┼────┼────┼────┤\n" +
-      "│    │    │    │    │    │\n" +
-      "├────┼────┼────┼────┼────┤\n" +
-      "│    │    │    │    │    │\n" +
-      "├────┼────┼────┼────┼────┤\n" +
-      "│    │    │    │    │    │\n" +
-      "└────┴────┴────┴────┴────┘"
-
-
-
-
-
-
-  val rr = res.init
-  //println(rr)
-  //println(str)
-
-  (str.zip(rr)).foreach { case (alec, aamir) =>
-    println("alec -> " + alec +  " ;N -> " + alec.toInt)
-    println("aami -> " + aamir + " ;N -> " + aamir.toInt)
-    println("-----------------------------------")
-  }
-
-  assert(str == rr)
-}
