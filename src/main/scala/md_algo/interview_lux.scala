@@ -1,6 +1,5 @@
 import java.nio.file.{Files, Paths}
-
-import cats.effect.{ExitCode, IO, Resource}
+import cats.effect.{ExitCode, IO, IOApp, Resource}
 import cats.implicits._
 
 import scala.collection.mutable
@@ -8,7 +7,7 @@ import scala.io.Source
 
 case class SensorData(sensorId: String, humidity: Double)
 
-object Main {
+object Main extends IOApp {
   def parseFile(file: String): IO[List[SensorData]] =
     Resource
       .fromAutoCloseable(IO(Source.fromFile(file)))
@@ -69,4 +68,13 @@ object Main {
            }
     } yield ()
   }
+
+  override def run(args: List[String]): IO[ExitCode] = {
+
+     run("/Users/awani/Documents/deletetest") *>
+    IO(println("--Done--")).as(ExitCode.Success)
+
+  }
 }
+
+
